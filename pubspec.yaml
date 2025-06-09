@@ -23,12 +23,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
-  firebase_core: ^2.27.0 # Firebase Core
-  firebase_auth: ^4.17.8 # 認証機能（今回はシンプルに匿名認証から始めます）
-  cloud_firestore: ^4.15.8 # Firestore データベース
-  firebase_storage: ^11.6.9 # 画像保存
-  image_picker: ^1.0.7 # カメラ・ギャラリーからの画像選択
-  uuid: ^4.3.3 # 一意なID生成
+  firebase_core: ^3.6.0 # Firebase Core
+  firebase_auth: ^5.3.0 # 認証機能（今回はシンプルに匿名認証から始めます）
+  cloud_firestore: ^5.6.0 # Firestore データベース
+  firebase_storage: ^12.3.3 # 画像保存
+  image_picker: ^1.1.2 # カメラ・ギャラリーからの画像選択
+  uuid: ^4.5.1 # 一意なID生成
 
 dev_dependencies:
   flutter_test:
