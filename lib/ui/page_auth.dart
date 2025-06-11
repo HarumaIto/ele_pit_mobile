@@ -29,7 +29,7 @@ class AuthPage extends ConsumerWidget {
                   ],
                   ElevatedButton.icon(
                     icon: Image.asset(
-                      'assets/google_logo.png', // Googleロゴ画像をassetsに追加してください
+                      'assets/images/google_logo.png',
                       height: 24,
                     ),
                     label: const Text('Googleでログイン'),
