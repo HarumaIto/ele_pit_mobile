@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  bool get isLogin => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
@@ -31,7 +31,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({bool isLogin, String error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
@@ -49,13 +49,13 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLogin = null,
+    Object? isLoading = null,
     Object? error = null,
   }) {
     return _then(_value.copyWith(
-      isLogin: null == isLogin
-          ? _value.isLogin
-          : isLogin // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       error: null == error
           ? _value.error
@@ -73,7 +73,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLogin, String error});
+  $Res call({bool isLoading, String error});
 }
 
 /// @nodoc
@@ -89,13 +89,13 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLogin = null,
+    Object? isLoading = null,
     Object? error = null,
   }) {
     return _then(_$AuthStateImpl(
-      isLogin: null == isLogin
-          ? _value.isLogin
-          : isLogin // ignore: cast_nullable_to_non_nullable
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       error: null == error
           ? _value.error
@@ -108,18 +108,18 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl({this.isLogin = false, this.error = ''});
+  const _$AuthStateImpl({this.isLoading = false, this.error = ''});
 
   @override
   @JsonKey()
-  final bool isLogin;
+  final bool isLoading;
   @override
   @JsonKey()
   final String error;
 
   @override
   String toString() {
-    return 'AuthState(isLogin: $isLogin, error: $error)';
+    return 'AuthState(isLoading: $isLoading, error: $error)';
   }
 
   @override
@@ -127,12 +127,13 @@ class _$AuthStateImpl implements _AuthState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthStateImpl &&
-            (identical(other.isLogin, isLogin) || other.isLogin == isLogin) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLogin, error);
+  int get hashCode => Object.hash(runtimeType, isLoading, error);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -144,11 +145,11 @@ class _$AuthStateImpl implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState({final bool isLogin, final String error}) =
+  const factory _AuthState({final bool isLoading, final String error}) =
       _$AuthStateImpl;
 
   @override
-  bool get isLogin;
+  bool get isLoading;
   @override
   String get error;
 
