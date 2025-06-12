@@ -1,3 +1,4 @@
 {
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "idf.pythonInstallPath": "/Users/harumaito/.pyenv/shims/python"
 }
