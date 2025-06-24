@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart';
 import 'package:ele_pit/model/local_data/table/parts.dart';
+import 'package:ele_pit/model/local_data/model/part.dart' as model;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
@@ -15,9 +16,9 @@ class AppDatabase extends _$AppDatabase {
   int get schemaVersion => 1;
 
   Future<int> insertPart(PartsCompanion part) => into(parts).insert(part);
-  Future<List<Part>> getAllParts() => select(parts).get().then(
+  Future<List<model.Part>> getAllParts() => select(parts).get().then(
         (rows) => rows
-            .map((row) => Part(
+            .map((row) => model.Part(
                   id: row.id,
                   name: row.name,
                   quantity: row.quantity,

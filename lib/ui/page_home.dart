@@ -15,16 +15,30 @@ class HomePage extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('部品一覧'),
       ),
-      body: ListView.builder(
-        itemCount: state.parts.length,
-        itemBuilder: (context, index) {
-          final part = state.parts[index];
-          return ListTile(
-            title: Text(part.name),
-            subtitle: Text('数量: ${part.quantity} / 場所: ${part.location}'),
-            onTap: () {
-              router.push('/edit_part', extra: part);
+      body: state.when(
+        data: (value) {
+          return ListView.builder(
+            itemCount: value.parts.length,
+            itemBuilder: (context, index) {
+              final part = value.parts[index];
+              return ListTile(
+                title: Text(part.name),
+                subtitle: Text('数量: ${part.quantity} / 場所: ${part.location}'),
+                onTap: () {
+                  router.push('/edit_part', extra: part);
+                },
+              );
             },
+          );
+        },
+        error: (error, stackTrace) {
+          return Center(
+            child: Text('Error: $error'),
+          );
+        },
+        loading: () {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         },
       ),
