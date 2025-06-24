@@ -1,5 +1,7 @@
 import 'package:ele_pit/provider/global/provider_auth.dart';
+import 'package:ele_pit/ui/page_add_part.dart';
 import 'package:ele_pit/ui/page_auth.dart';
+import 'package:ele_pit/ui/page_edit_part.dart';
 import 'package:ele_pit/ui/page_home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -23,12 +25,23 @@ final routerProvider = Provider<GoRouter>((ref) {
     },
     routes: [
       GoRoute(
+        path: '/',
+        builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
         path: '/auth',
         builder: (context, state) => const AuthPage(),
       ),
       GoRoute(
-        path: '/',
-        builder: (context, state) => const HomePage(),
+        path: '/add_part',
+        builder: (context, state) => const AddPartPage(),
+      ),
+      GoRoute(
+        path: '/edit_part',
+        builder: (context, state) {
+          final part = state.extra as Map<String, dynamic>?;
+          return EditPartPage(part: part);
+        },
       ),
     ],
   );
