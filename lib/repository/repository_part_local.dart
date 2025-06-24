@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:ele_pit/model/local_data/app_database.dart';
 import 'package:ele_pit/provider/global/provider_app_database.dart';
 import 'package:ele_pit/model/local_data/model/part.dart' as model;
@@ -16,7 +17,20 @@ class LocalPartRepository implements PartRepository {
   Future<List<model.Part>> fetchAllParts() => db.getAllParts();
 
   @override
-  Future<int> addPart(PartsCompanion part) => db.insertPart(part);
+  Future<int> addPart({
+    required String name,
+    required int quantity,
+    required String location,
+    String? imagePath,
+  }) {
+    final part = PartsCompanion(
+      name: Value(name),
+      quantity: Value(quantity),
+      location: Value(location),
+      imagePath: Value(imagePath),
+    );
+    return db.insertPart(part);
+  }
 
   @override
   Future<void> deletePart(int id) => db.deletePart(id);

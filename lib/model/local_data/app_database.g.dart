@@ -3,7 +3,7 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $PartsTable extends Parts with TableInfo<$PartsTable, Part> {
+class $PartsTable extends Parts with TableInfo<$PartsTable, model.Part> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -49,7 +49,7 @@ class $PartsTable extends Parts with TableInfo<$PartsTable, Part> {
   String get actualTableName => $name;
   static const String $name = 'parts';
   @override
-  VerificationContext validateIntegrity(Insertable<Part> instance,
+  VerificationContext validateIntegrity(Insertable<model.Part> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -84,9 +84,9 @@ class $PartsTable extends Parts with TableInfo<$PartsTable, Part> {
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  Part map(Map<String, dynamic> data, {String? tablePrefix}) {
+  model.Part map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return Part(
+    return model.Part(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       name: attachedDatabase.typeMapping
@@ -106,7 +106,7 @@ class $PartsTable extends Parts with TableInfo<$PartsTable, Part> {
   }
 }
 
-class Part extends DataClass implements Insertable<Part> {
+class Part extends DataClass implements Insertable<model.Part> {
   final int id;
   final String name;
   final int quantity;
@@ -214,7 +214,7 @@ class Part extends DataClass implements Insertable<Part> {
           other.imagePath == this.imagePath);
 }
 
-class PartsCompanion extends UpdateCompanion<Part> {
+class PartsCompanion extends UpdateCompanion<model.Part> {
   final Value<int> id;
   final Value<String> name;
   final Value<int> quantity;
@@ -236,7 +236,7 @@ class PartsCompanion extends UpdateCompanion<Part> {
   })  : name = Value(name),
         quantity = Value(quantity),
         location = Value(location);
-  static Insertable<Part> custom({
+  static Insertable<model.Part> custom({
     Expression<int>? id,
     Expression<String>? name,
     Expression<int>? quantity,
@@ -404,14 +404,14 @@ class $$PartsTableAnnotationComposer
 class $$PartsTableTableManager extends RootTableManager<
     _$AppDatabase,
     $PartsTable,
-    Part,
+    model.Part,
     $$PartsTableFilterComposer,
     $$PartsTableOrderingComposer,
     $$PartsTableAnnotationComposer,
     $$PartsTableCreateCompanionBuilder,
     $$PartsTableUpdateCompanionBuilder,
-    (Part, BaseReferences<_$AppDatabase, $PartsTable, Part>),
-    Part,
+    (model.Part, BaseReferences<_$AppDatabase, $PartsTable, model.Part>),
+    model.Part,
     PrefetchHooks Function()> {
   $$PartsTableTableManager(_$AppDatabase db, $PartsTable table)
       : super(TableManagerState(
@@ -461,14 +461,14 @@ class $$PartsTableTableManager extends RootTableManager<
 typedef $$PartsTableProcessedTableManager = ProcessedTableManager<
     _$AppDatabase,
     $PartsTable,
-    Part,
+    model.Part,
     $$PartsTableFilterComposer,
     $$PartsTableOrderingComposer,
     $$PartsTableAnnotationComposer,
     $$PartsTableCreateCompanionBuilder,
     $$PartsTableUpdateCompanionBuilder,
-    (Part, BaseReferences<_$AppDatabase, $PartsTable, Part>),
-    Part,
+    (model.Part, BaseReferences<_$AppDatabase, $PartsTable, model.Part>),
+    model.Part,
     PrefetchHooks Function()>;
 
 class $AppDatabaseManager {
