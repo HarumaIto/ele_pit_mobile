@@ -24,7 +24,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/auth',
-        builder: (context, state) => AuthPage(),
+        builder: (context, state) => const AuthPage(),
       ),
       GoRoute(
         path: '/',

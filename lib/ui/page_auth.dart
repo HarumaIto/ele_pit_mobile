@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthPage extends ConsumerWidget {
-  AuthPage({super.key});
-
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _passwordConfirmController = TextEditingController();
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,83 +12,43 @@ class AuthPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(state.value?.isLogin == true ? 'ログイン' : '新規登録'),
+        title: const Text('Googleでログイン'),
       ),
-      body: state.when(
-        data: (data) => Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Form(
-              key: _formKey,
+      body: Stack(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(labelText: 'メールアドレス'),
-                    validator: (v) => v == null || v.isEmpty ? 'メールアドレスを入力してください' : null,
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: const InputDecoration(labelText: 'パスワード'),
-                    obscureText: true,
-                    validator: (v) => v == null || v.length < 6 ? '6文字以上で入力してください' : null,
-                  ),
-                  if (!data.isLogin) ...[
+                  if (state.error.isNotEmpty) ...[
+                    Text(state.error,
+                        style: const TextStyle(color: Colors.red)),
                     const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _passwordConfirmController,
-                      decoration: const InputDecoration(labelText: 'パスワード（確認用）'),
-                      obscureText: true,
-                      validator: (v) {
-                        if (v == null || v.isEmpty) {
-                          return '確認用パスワードを入力してください';
-                        }
-                        if (v != _passwordController.text) {
-                          return 'パスワードが一致しません';
-                        }
-                        return null;
-                      },
+                  ],
+                  ElevatedButton.icon(
+                    icon: Image.asset(
+                      'assets/images/google_logo.png',
+                      height: 24,
                     ),
-                  ],
-                  if (data.error.isNotEmpty) ...[
-                    const SizedBox(height: 12),
-                    Text(data.error, style: const TextStyle(color: Colors.red)),
-                  ],
-                  const SizedBox(height: 24),
-                  ElevatedButton(
+                    label: const Text('Googleでログイン'),
                     onPressed: () async {
-                      if (!_formKey.currentState!.validate()) return;
-                      await notifier.handleButtonPressed(
-                        _emailController.text.trim(),
-                        _passwordController.text.trim(),
-                      );
+                      await notifier.signInWithGoogle();
                     },
-                    child: Text(data.isLogin ? 'ログイン' : '新規登録'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      notifier.toggleLogin();
-                      _passwordController.clear();
-                      _passwordConfirmController.clear();
-                    },
-                    child: Text(data.isLogin
-                        ? 'アカウントをお持ちでない方はこちら'
-                        : 'すでにアカウントをお持ちの方はこちら'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 48),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
-        error: (error, stack) {
-          return Center(child: Text(error.toString()));
-        },
-        loading: () {
-          return const Center(child: CircularProgressIndicator());
-        },
+          if (state.isLoading)
+            const Center(
+              child: CircularProgressIndicator(),
+            ),
+        ],
       ),
     );
   }
